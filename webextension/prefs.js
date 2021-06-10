@@ -14,6 +14,7 @@ var Prefs = {
 	_spacing: 'small',
 	_titleSize: 'small',
 	_locked: false,
+	_preferIcons: false,
 	_history: true,
 	_recent: true,
 	_thumbnailSize: 600,
@@ -33,6 +34,7 @@ var Prefs = {
 			'spacing',
 			'titleSize',
 			'locked',
+			'preferIcons',
 			'history',
 			'recent',
 			'thumbnailSize',
@@ -80,6 +82,9 @@ var Prefs = {
 		}
 		if ('locked' in prefs) {
 			this._locked = prefs.locked === true;
+		}
+		if ('preferIcons' in prefs) {
+			this._preferIcons = prefs.preferIcons === true;
 		}
 		if ('history' in prefs) {
 			this._history = prefs.history !== false;

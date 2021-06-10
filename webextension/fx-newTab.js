@@ -830,6 +830,7 @@ Site.prototype = {
 	refreshThumbnail() {
 		let thumbnail = this.thumbnail;
 		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
+		console.log('this.link', this.link, this.link.image);
 		if (this.link.image) {
 			let thumbnailURL = URL.createObjectURL(this.link.image);
 			thumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';

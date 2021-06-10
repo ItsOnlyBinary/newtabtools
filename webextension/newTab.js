@@ -415,6 +415,7 @@ var newTabTools = {
 			Prefs.margin = value.split(' ');
 			break;
 		case 'locked':
+		case 'preferIcons':
 		case 'history':
 		case 'recent':
 			Prefs[name] = checked;
@@ -566,6 +567,10 @@ var newTabTools = {
 			} else {
 				document.documentElement.removeAttribute('locked');
 			}
+		}
+
+		if (!keys || keys.includes('preferIcons')) {
+			document.querySelector('[name="preferIcons"]').checked = Prefs.preferIcons;
 		}
 
 		if (!keys || keys.includes('titleSize')) {
@@ -909,12 +914,17 @@ var newTabTools = {
 				if (!s) {
 					return;
 				}
+				console.log('site', s);
 				let link = s.link;
 				if (!link.image) {
 					let thumb = thumbs.get(link.url);
-					if (thumb) {
-						let css = 'url(' + URL.createObjectURL(thumb) + ')';
+					if (thumb && thumb.image) {
+						console.log('thumb', thumb);
+						let css = 'url(' + URL.createObjectURL(thumb.image) + ')';
 						s.thumbnail.style.backgroundImage = css;
+						if (thumb.isIcon) {
+							s.thumbnail.style.backgroundSize = 'contain';
+						}
 
 						if (newTabTools.selectedSite == s) {
 							newTabTools.siteThumbnail.style.backgroundImage = css;

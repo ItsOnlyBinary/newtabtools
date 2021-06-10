@@ -151,13 +151,14 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		return true;
 
 	case 'Thumbnails.save':
-		let {url, image} = message;
+		let {url, image, isIcon} = message;
 		if (url && image) {
 			db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
 				url,
 				image,
 				stored: today,
-				used: today
+				used: today,
+				isIcon: isIcon,
 			});
 		}
 		return false;
@@ -168,7 +169,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			if (cursor) {
 				let thumb = cursor.value;
 				if (message.urls.includes(thumb.url)) {
-					map.set(thumb.url, thumb.image);
+					map.set(thumb.url, {image: thumb.image, isIcon: thumb.isIcon});
 					if (thumb.used != today) {
 						thumb.used = today;
 						cursor.update(thumb);

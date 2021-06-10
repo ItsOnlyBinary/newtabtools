@@ -165,6 +165,9 @@
 	"options_locked": {
 		"message": "Prevent tiles being dragged"
 	},
+	"options_prefer_icons": {
+		"message": "Prefer Icons"
+	},
 	"options_recent": {
 		"message": "Recently closed tabs"
 	},
